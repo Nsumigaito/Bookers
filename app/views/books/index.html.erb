@@ -1,0 +1,61 @@
+<div class = "index-box">
+	<h2 class = "index-headline">Books</h2>
+
+	<table class = "index-table">
+		<thead>
+			<tr class = "table-record">
+				<th class = "table-headline">Title</th>
+				<th class = "table-headline">Body<th>
+			</tr>
+		</thead>
+		<% @books.each do |book| %>
+			<tbody>
+				<tr>
+					<td class = "table-data"><%= book.title %></td>
+					<td class = "table-data"><%= book.body %></td>
+					<th class = "table-link">
+						<%= link_to 'Show', book_path(book.id) %>
+						</th>
+					<th class = "table-link">
+						<%= link_to 'Edit', edit_book_path(book.id)  %>
+						</th>
+					<th class = "table-link">
+						<%= link_to 'Destroy', book_path(book.id), method: :delete, "data-confirm" => "Are you sure?" %>
+						</th>
+				</tr>
+			</tbody>
+		<% end %>
+	</table>
+</div>
+
+<div class = "new-box">
+	<h3 class = "new-headline">New book</h3>
+
+	<div class = "index-form">
+		<%= form_for(@new_book) do |f| %>
+			<% if @new_book.errors.any? %>
+				<section class = "alert alert-warning">
+		      		<h5 class = "error-headline">
+		      			<%= pluralize(@new_book.errors.count, "error") %> prohibited this book from being saved:
+		      		</h5>
+					<ul class = "error-list">
+						<% @new_book.errors.full_messages.each do |message| %>
+							<li class = "errors"><%= message %></li>
+						<% end %>
+					</ul>
+				</section>
+			<% end %>
+			<div class = "first-field">
+				<%= f.label :title %>
+				<%= f.text_field :title, :class => 'book_title' %>
+			</div>
+			<div class = "second-field">
+				<%= f.label :body %>
+				<%= f.text_area :body, :class => 'book_body' %>
+			</div>
+			<div class = "actions">
+				<%= f.submit 'Create Book', :class => 'form_button' %>
+			</div>
+		<% end %>
+	</div>
+</div>

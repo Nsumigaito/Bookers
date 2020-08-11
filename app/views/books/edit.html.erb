@@ -1,0 +1,37 @@
+<div class = "edit-box">
+	<h2 class = "edit-headline">Editing Book</h2>
+
+	<div class = "edit-form">
+		<%= form_for(@book) do |f| %>
+			<% if @book.errors.any? %>
+				<section class = "alert alert-warning">
+		      		<h5 class = "error-headline">
+		      			<%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:
+		      		</h5>
+					<ul class = "error-list">
+						<% @book.errors.full_messages.each do |message| %>
+							<li class = "errors"><%= message %></li>
+						<% end %>
+					</ul>
+				</section>
+			<% end %>
+			<div class = "first-field">
+				<%= f.label :title %>
+				<%= f.text_field :title, :class => 'book_title' %>
+			</div>
+			<div class = "second-field">
+				<%= f.label :body %>
+				<%= f.text_area :body, :class => 'book_body' %>
+			</div>
+			<div class = "actions">
+				<%= f.submit 'Update Book', :class => 'form_button' %>
+			</div>
+		<% end %>
+	</div>
+
+	<div class = "edit-link">
+		<%= link_to 'Show', book_path(@book), :class => 'link-show' %>
+		<span class = "link-block">|</span>
+		<%= link_to 'Back', books_path, :class => 'link-back' %>
+	</div>
+</div>
